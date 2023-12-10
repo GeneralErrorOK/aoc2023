@@ -68,7 +68,7 @@ class CamelCardsHandJoker:
     def __init__(self, cards: str, bid: int) -> None:
         self.bid = bid
         self.original_cards = cards[:]
-        if not "J" in cards:
+        if "J" not in cards:
             self.cards = cards[:]
         else:
             card_counter = Counter(cards)
