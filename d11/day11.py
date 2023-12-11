@@ -4,16 +4,11 @@ import numpy
 
 
 def get_empty_space(universe: List[List[str]]) -> Tuple[List[int]]:
-    empty_rows = []
-    empty_collumns = []
-    universe = numpy.array(universe)
-    for i, row in enumerate(universe):
-        if "#" not in row:
-            empty_rows.append(i)
-    for i, collumn in enumerate(universe.transpose()):
-        if "#" not in collumn:
-            empty_collumns.append(i)
-    return empty_rows, empty_collumns
+    return [i for i, row in enumerate(universe) if "#" not in row], [
+        i
+        for i, collumn in enumerate(numpy.array(universe).transpose())
+        if "#" not in collumn
+    ]
 
 
 def expand_coords(
@@ -25,12 +20,10 @@ def expand_coords(
     new_coords = []
     for galaxy in galaxy_coords:
         x, y = galaxy
-        mt_c = empty_collumns.copy()
-        mt_c.append(x)
+        mt_c = [*empty_collumns, x]
         mt_c.sort()
         x = x + (expansion_rate * mt_c.index(x))
-        mt_r = empty_rows.copy()
-        mt_r.append(y)
+        mt_r = [*empty_rows, y]
         mt_r.sort()
         y = y + (expansion_rate * mt_r.index(y))
         new_coords.append([x, y])
