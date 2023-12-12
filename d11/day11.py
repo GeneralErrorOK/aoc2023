@@ -5,9 +5,7 @@ import numpy
 
 def get_empty_space(universe: List[List[str]]) -> Tuple[List[int]]:
     return [i for i, row in enumerate(universe) if "#" not in row], [
-        i
-        for i, collumn in enumerate(numpy.array(universe).transpose())
-        if "#" not in collumn
+        i for i, collumn in enumerate(numpy.array(universe).transpose()) if "#" not in collumn
     ]
 
 
@@ -40,12 +38,7 @@ def get_galaxy_coords(universe: List[List[str]]) -> List[List[int]]:
 
 
 def get_total_distance(galaxy_coords: List) -> int:
-    total = 0
-    for g1, g2 in combinations(galaxy_coords, 2):
-        dx = abs(g2[0] - g1[0])
-        dy = abs(g2[1] - g1[1])
-        total += dx + dy
-    return total
+    return sum([abs(g2[0] - g1[0]) + abs(g2[1] - g1[1]) for g1, g2 in combinations(galaxy_coords, 2)])
 
 
 def part_one(lines: str) -> int:
