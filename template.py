@@ -1,4 +1,5 @@
 def part_one(lines: str) -> int:
+    init_sequence = lines.split(",")
     return None
 
 
